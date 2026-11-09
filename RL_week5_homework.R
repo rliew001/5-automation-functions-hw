@@ -18,14 +18,24 @@ ds <- tibble(id, x, y, z)
 #Write a function called "limit_replace" that replaces values less than 2 or greater than 8 with NA
 #The function should take a vector as input and return the replaced-vector as an output
 #Then, run the function on x and save the results to a new vector "x_replace" to show it worked
-
+limit_replace <- function(num){
+  new_num <- ifelse(num<2 | num>8,NA,num)
+  return(new_num)
+}
+x_replace <- limit_replace(x)
+x_replace
 
 ### Question 2 ---------- 
 
 #Make a new version of limit_replace includes arguments for a lower boundary and an upper boundary
 #so that the limits can be specified (instead of being hard coded as 2 and 8)
 #Run the function on vector y with boundaries 4 and 6, saving the results to a new vector "y_replace"
-
+limit_replace <- function(num, lower, upper){
+  new_num2 <- ifelse(num<lower | num > upper, NA, num)
+  return(new_num2)
+}
+y_replace <- limit_replace(y, 4,6)
+y_replace
 
 ### Question 3 ----------
 
@@ -36,6 +46,13 @@ ds <- tibble(id, x, y, z)
 #The output should be a named list two values, lower and upper.
 #Running plus_minus_SD(x) should produce: $lower 2.142724 $upper 8.048324
 
+# values should be one SD above and below the mean 
+plus_minus_SD <- function(num, num_of_SDs = 1){
+  mean <- mean(num)
+  sd <- sd(num)
+  list(lower = mean -num_of_SDs*sd, upper = mean +num_of_SDs*sd)
+}
+plus_minus_SD(x)
 
 ### Question 4 ----------
 # Use a map function to run the new function on x, y, and z with 1 SD
